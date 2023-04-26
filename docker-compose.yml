@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  api-solid-pg:
+    image: bitnami/postgresql
+    container_name: "api-solid-pg-postgres"
+    restart: always
+    ports:
+      - 5450:5432
+    environment:
+      - POSTGRESQL_USERNAME=docker
+      - POSTGRESQL_PASSWORD=docker
+      - POSTGRESQL_DATABASE=apisolid
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    networks:
+      - api-solid-nodejs
+volumes:
+  dbdata:
+    name: postgresql-api-solid-nodejs
+    external: false
+networks:
+  api-solid-nodejs:
+    name: api-solid-nodejs
+    driver: bridge
+    external: false

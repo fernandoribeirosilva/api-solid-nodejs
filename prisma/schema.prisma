@@ -2,15 +2,39 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// para salvar a senha vai ser usada a estrategia de Hashing, onde não podemos descriptografa.
+// aparti que o hashing foi gerado não podemos voltar este hashing ao original para saber qual que era a senha
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id    String @id @default(uuid())
-  name  String
-  email String @unique
+  id            String   @id @default(uuid())
+  name          String
+  email         String   @unique
+  password_hash String
+  created_at    DateTime @default(now())
 
   @@map("users")
+}
+
+model CheckIn {
+  id           String    @id @default(uuid())
+  created_at   DateTime  @default(now())
+  validated_at DateTime?
+
+  @@map("check_in")
+}
+
+model Gym {
+  id          String  @id @default(uuid())
+  title       String
+  description String?
+  phone       String?
+  latitude    String
+  longitude   String
+
+  @@map("gyms")
 }

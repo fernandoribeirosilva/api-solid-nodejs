@@ -20,7 +20,7 @@ interface RegisterUseCaseResponse {
 //  as dependências como parâmetro
 
 export class RegisterUseCase {
-  constructor(private usersRepository: IUsersRepository) { }
+  constructor(private usersRepository: IUsersRepository) {}
 
   async execute({
     name,

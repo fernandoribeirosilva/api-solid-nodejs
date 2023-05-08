@@ -21,8 +21,8 @@ export class InMemoryCheckInsRepository implements ICheckInsRepository {
   }
 
   async findByUserIdOnDate(userId: string, date: Date) {
-    const startOfTheDay = dayjs(date).startOf('date')
-    const endOfTheDay = dayjs(date).endOf('date')
+    const startOfTheDay = dayjs(date).startOf('date') // começo do dia
+    const endOfTheDay = dayjs(date).endOf('date') // final do dia
 
     const checkInOnSameDate = this.items.find((checkIn) => {
       const checkInDate = dayjs(checkIn.created_at)

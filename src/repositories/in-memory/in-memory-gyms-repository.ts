@@ -23,8 +23,6 @@ export class InMemoryGymsRepository implements IGymsRepository {
         },
       )
 
-      console.log(distance)
-
       return distance < 10 // 10Km
     })
   }

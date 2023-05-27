@@ -31,9 +31,27 @@ export async function authenticate(
       },
     )
 
-    return reply.code(200).send({
-      token,
-    })
+    const refreshToken = await reply.jwtSign(
+      {},
+      {
+        sign: {
+          sub: user.id,
+          expiresIn: '7d', // 7 days
+        },
+      },
+    )
+
+    return reply
+      .setCookie('refreshToken', refreshToken, {
+        path: '/', // quais rotas vai ter acesso a este cookie, do nosso backEnd vai ter acesso ao cookie. a "/" que dizer que todo o backEnd vai ter acesso ao cookie
+        secure: true, // vai ser encriptado pelo método HTTPs. Quando colocamos secure: true, o frontEnd não vai conseguir ler o valor de cookie
+        sameSite: true, // vai ser somente acessível somente dentro do mesmo domínio (mesmo site)
+        httpOnly: true, // que dizer que este token só vai ser acessado por dentro do backEnd
+      })
+      .code(200)
+      .send({
+        token,
+      })
   } catch (error) {
     if (error instanceof InvalidCredentialsError) {
       return reply.code(400).send({ message: error.message })

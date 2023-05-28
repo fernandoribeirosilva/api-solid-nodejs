@@ -16,7 +16,7 @@ app.register(fastifyJwt, {
     signed: false,
   },
   sign: {
-    expiresIn: '10m', // 10 minutos // em aplicação que vamos deixar o usuário logado para sempre é bom deixar uma data expiração bem curta, assim podemos revalidar este token constantemente em pouco em pouco tempo, revalidar este token. Que é este processo de  checar se existe um refrashToken dentro do contesto da nossa requisição, se sim criar um novo JWT, a sim o usuário nunca vai perder o login
+    expiresIn: '10m', // 10 minutos estes 10 minutos é para o token não é para o refreshToken // em aplicação que vamos deixar o usuário logado para sempre é bom deixar uma data expiração bem curta, assim podemos revalidar este token constantemente em pouco em pouco tempo, revalidar este token. Que é este processo de  checar se existe um refrashToken dentro do contesto da nossa requisição, se sim criar um novo JWT, a sim o usuário nunca vai perder o login
   },
 })
 
